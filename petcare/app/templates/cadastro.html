@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Define que o documento é HTML e que o idioma da página é português do Brasil -->
+
+<head>
+
+    <meta charset="UTF-8">
+    <!-- Permite utilizar acentos e caracteres especiais, como ã, ç, é, etc. -->
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <!-- Faz a página se adaptar ao tamanho da tela, inclusive celular -->
+
+    <title>Cadastro - PetCare</title>
+    <!-- Define o título que aparece na aba do navegador -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+    <!-- Importa o arquivo CSS da pasta static -->
+    <!-- O Flask usa url_for para encontrar corretamente o arquivo style.css -->
+
+</head>
+
+<body>
+<!-- Aqui começa o conteúdo que será mostrado na página -->
+
+    <main class="container">
+    <!-- Área principal da página -->
+    <!-- A classe "container" será usada pelo CSS para estilizar essa área -->
+
+        <h1>🐾 Cadastre seu Pet</h1>
+        <!-- Título principal da página -->
+
+        <p class="subtitulo">
+            Preencha os dados do responsável e do pet.
+        </p>
+        <!-- Texto explicando para o usuário o que ele deve fazer -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+        <!--
+            Aqui começa um código do Flask/Jinja.
+
+            get_flashed_messages() pega mensagens que foram
+            enviadas pelo Flask usando flash().
+
+            with_categories=true permite que cada mensagem tenha
+            uma categoria, como "sucesso" ou "erro".
+
+            Exemplo no Python:
+            flash("Cadastro realizado!", "sucesso")
+        -->
+
+            {% if mensagens %}
+            <!-- Verifica se existe alguma mensagem para mostrar -->
+
+                {% for categoria, mensagem in mensagens %}
+                <!--
+                    Percorre todas as mensagens.
+
+                    categoria = tipo da mensagem
+                    mensagem = texto que será exibido
+                -->
+
+                    <div class="mensagem {{ categoria }}">
+                    <!--
+                        Cria uma div para mostrar a mensagem.
+
+                        {{ categoria }} é substituído pelo Flask.
+
+                        Por exemplo:
+                        class="mensagem sucesso"
+
+                        ou:
+                        class="mensagem erro"
+                    -->
+
+                        {{ mensagem }}
+                        <!-- Mostra o texto da mensagem -->
+
+                    </div>
+
+                {% endfor %}
+                <!-- Fim do loop das mensagens -->
+
+            {% endif %}
+            <!-- Fim da verificação de mensagens -->
+
+        {% endwith %}
+        <!-- Fim do bloco que trabalha com as mensagens -->
+
+        <form
+            action="{{ url_for('cadastrar') }}"
+            method="post">
+        <!--
+            Formulário responsável pelo cadastro.
+
+            action:
+            Define para qual rota do Flask os dados serão enviados.
+
+            url_for('cadastrar'):
+            Procura no Python uma função/rota chamada "cadastrar".
+
+            method="post":
+            Envia os dados do formulário através do método POST.
+        -->
+
+            <h2>Dados do responsável</h2>
+            <!-- Título da parte de dados do responsável -->
+
+            <label for="nome_responsavel">
+                Nome
+            </label>
+            <!-- Texto que identifica o campo de nome -->
+
+            <input
+                id="nome_responsavel"
+                name="nome_responsavel"
+                type="text"
+                required>
+            <!--
+                Campo para digitar o nome do responsável.
+
+                id:
+                Identifica o campo dentro do HTML.
+
+                name:
+                É o nome que o Flask utiliza para pegar o valor enviado.
+
+                type="text":
+                Permite digitar texto.
+
+                required:
+                Faz o preenchimento desse campo ser obrigatório.
+            -->
+
+            <label for="telefone">
+                Telefone
+            </label>
+            <!-- Texto que identifica o campo de telefone -->
+
+            <input
+                id="telefone"
+                name="telefone"
+                type="tel"
+                required>
+            <!--
+                Campo para telefone.
+
+                type="tel":
+                Indica que o campo deve receber um telefone.
+
+                required:
+                Obriga o usuário a preencher o campo.
+            -->
+
+            <label for="email">
+                E-mail
+            </label>
+            <!-- Texto que identifica o campo de e-mail -->
+
+            <input
+                id="email"
+                name="email"
+                type="email"
+                required>
+            <!--
+                Campo para e-mail.
+
+                type="email":
+                Faz o navegador verificar se o formato
+                parece ser um e-mail válido.
+
+                required:
+                Torna o preenchimento obrigatório.
+            -->
+
+            <h2>Dados do pet</h2>
+            <!-- Título da parte de dados do pet -->
+
+            <label for="nome_pet">
+                Nome do pet
+            </label>
+            <!-- Texto que identifica o campo do nome do pet -->
+
+            <input
+                id="nome_pet"
+                name="nome_pet"
+                type="text"
+                required>
+            <!--
+                Campo para informar o nome do animal.
+
+                name="nome_pet":
+                É esse nome que será usado no Python
+                para pegar o valor enviado pelo formulário.
+            -->
+
+            <label for="tipo">
+                Tipo
+            </label>
+            <!-- Texto que identifica o campo de tipo do animal -->
+
+            <select
+                id="tipo"
+                name="tipo"
+                required>
+            <!--
+                Cria uma lista de opções.
+
+                O usuário não precisa digitar:
+                ele escolhe uma opção.
+
+                required:
+                Obriga o usuário a escolher alguma opção.
+            -->
+
+                <option value="">
+                    Selecione
+                </option>
+                <!--
+                    Primeira opção.
+                    O value está vazio porque ela serve apenas
+                    como instrução para o usuário.
+                -->
+
+                <option value="Cachorro">
+                    Cachorro
+                </option>
+                <!-- Opção para cachorro -->
+
+                <option value="Gato">
+                    Gato
+                </option>
+                <!-- Opção para gato -->
+
+                <option value="Ave">
+                    Ave
+                </option>
+                <!-- Opção para ave -->
+
+                <option value="Outro">
+                    Outro
+                </option>
+                <!-- Opção para outros tipos de animais -->
+
+            </select>
+            <!-- Fim da lista de tipos -->
+
+            <label for="raca">
+                Raça
+            </label>
+            <!-- Texto que identifica o campo de raça -->
+
+            <input
+                id="raca"
+                name="raca"
+                type="text"
+                required>
+            <!--
+                Campo para informar a raça do pet.
+
+                type="text":
+                Permite digitar texto.
+
+                required:
+                Torna o preenchimento obrigatório.
+            -->
+
+            <button type="submit">
+                Cadastrar Pet
+            </button>
+            <!--
+                Botão que envia o formulário.
+
+                type="submit":
+                Faz o navegador enviar os dados
+                para a rota definida no action.
+            -->
+
+        </form>
+        <!-- Fim do formulário -->
+
+        <a
+            href="{{ url_for('index') }}"
+            class="voltar">
+            <!--
+                Link para voltar para a página inicial.
+
+                url_for('index'):
+                O Flask procura a rota chamada "index".
+
+                class="voltar":
+                Permite estilizar esse link através do CSS.
+            -->
+
+            ← Voltar
+
+        </a>
+
+    </main>
+    <!-- Fim da área principal -->
+
+</body>
+<!-- Fim do conteúdo da página -->
+
+</html>
+<!-- Fim do documento HTML -->
+

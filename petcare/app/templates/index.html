@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>PetCare</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1> PetCare</h1>
+
+        <p class="subtitulo">
+            Cuidando de quem faz parte da sua família.
+        </p>
+
+        <section>
+
+            <h2>Sobre a PetCare</h2>
+
+            <p>
+                A PetCare é uma empresa especializada em produtos
+                e serviços para animais de estimação.
+            </p>
+
+            <p>
+                Nosso objetivo é oferecer cuidado, conforto e
+                bem-estar para os pets e seus responsáveis.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2>Principais serviços</h2>
+
+            <div class="servicos">
+
+                <div class="servico">
+                    <h3> Banho e Tosa</h3>
+
+                    <p>
+                        Cuidados para manter seu pet limpo,
+                        confortável e saudável.
+                    </p>
+                </div>
+
+                <div class="servico">
+                    <h3> Cuidados Veterinários</h3>
+
+                    <p>
+                        Serviços voltados para a saúde
+                        e bem-estar dos animais.
+                    </p>
+                </div>
+
+                <div class="servico">
+                    <h3> Produtos para Pets</h3>
+
+                    <p>
+                        Produtos para alimentação,
+                        diversão e conforto.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <h2>Contato</h2>
+
+            <p> Telefone: (16) 99999-9999</p>
+
+            <p>E-mail: contato@petcare.com</p>
+
+        </section>
+
+        <a
+            href="{{ url_for('cadastro') }}"
+            class="botao">
+
+            Cadastre seu Pet
+
+        </a>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS cadastros (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    nome_responsavel VARCHAR(100) NOT NULL,
+
+    telefone VARCHAR(20) NOT NULL,
+
+    email VARCHAR(150) NOT NULL,
+
+    nome_pet VARCHAR(100) NOT NULL,
+
+    tipo VARCHAR(50) NOT NULL,
+
+    raca VARCHAR(100) NOT NULL,
+
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
